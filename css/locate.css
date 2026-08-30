@@ -1,0 +1,68 @@
+/* ==========================================================================
+   Locate
+   ========================================================================== */
+.locate { position: relative; }
+.locate .wrap { position: relative; z-index: 1; }
+
+.locate__grid {
+  display: grid;
+  gap: var(--space-lg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.locate__map {
+  position: relative;
+  min-height: 320px;
+  background:
+    radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 60%),
+    var(--bg-base);
+  overflow: hidden;
+}
+.locate__map svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.55; }
+.locate__pin {
+  position: absolute;
+  top: 46%; left: 48%;
+  transform: translate(-50%, -100%);
+  display: grid;
+  place-items: center;
+}
+.locate__pin .pin-dot {
+  width: 18px; height: 18px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--accent);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.locate__details { padding: clamp(1.5rem, 4vw, 3rem); }
+
+.locate__row {
+  display: flex;
+  gap: 1rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.locate__row:first-of-type { padding-top: 0; }
+.locate__row:last-of-type { border-bottom: none; }
+.locate__row svg { width: 22px; height: 22px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+.locate__row h4 { font-family: var(--font-body); font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; }
+.locate__row p { color: var(--text-secondary); font-size: 0.92rem; }
+
+.locate__hours {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35rem 1rem;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+.locate__hours dt { color: var(--text-primary); font-weight: 600; }
+
+.locate__actions { margin-top: var(--space-md); display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+@media (min-width: 900px) {
+  .locate__grid { grid-template-columns: 1.1fr 1fr; }
+}

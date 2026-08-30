@@ -1,0 +1,98 @@
+/* ==========================================================================
+   BLACK COFFEE — Design tokens
+   Palette source: brand moodboard (Chinese Black / Dark Jungle Green / Jet /
+   Coffee / Antique Brass). Same accent hues carry through both themes so the
+   brand reads consistently; only the base/surface/text values invert.
+   ========================================================================== */
+
+:root {
+  /* ---- Brand hues (theme-independent) ---- */
+  --brass: #c99d7b;
+  --brass-strong: #e8c9a8;
+  --coffee: #724b39;
+  --coffee-deep: #4a2e22;
+
+  /* ---- Type ---- */
+  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", serif;
+  --font-body: "Manrope", "Segoe UI", system-ui, sans-serif;
+
+  /* ---- Type scale (fluid) ---- */
+  --fs-hero: clamp(2.3rem, 3.6vw + 1rem, 4.25rem);
+  --fs-h2: clamp(2rem, 3.2vw + 1rem, 3.4rem);
+  --fs-h3: clamp(1.3rem, 1.4vw + 1rem, 1.8rem);
+  --fs-body: clamp(1rem, 0.3vw + 0.9rem, 1.125rem);
+  --fs-small: 0.875rem;
+  --fs-eyebrow: 0.8125rem;
+
+  /* ---- Spacing ---- */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.75rem;
+  --space-lg: 3rem;
+  --space-xl: 5rem;
+  --space-2xl: 8rem;
+
+  /* ---- Layout ---- */
+  --container-w: 1280px;
+  --edge: clamp(1.25rem, 4vw, 4rem);
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-pill: 999px;
+
+  /* ---- Motion ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 180ms;
+  --dur-med: 420ms;
+  --dur-slow: 700ms;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Dark theme (default / brand-native)                                    */
+/* ---------------------------------------------------------------------- */
+:root,
+[data-theme="dark"] {
+  --bg-base: #0c1519;
+  --bg-elevated: #101b20;
+  --bg-gradient: linear-gradient(180deg, #0c1519 0%, #142027 55%, #162127 100%);
+  --surface: #1a2126;
+  --surface-raised: #232a2c;
+  --border: rgba(201, 157, 123, 0.16);
+  --border-strong: rgba(201, 157, 123, 0.32);
+
+  --text-primary: #f4ebe1;
+  --text-secondary: #cfc2b6;
+  --text-muted: #8d8178;
+
+  --accent: var(--brass);
+  --accent-contrast: #0c1519;
+  --overlay-scrim: rgba(9, 14, 16, 0.55);
+  --navbar-bg: rgba(12, 21, 25, 0.55);
+  --navbar-bg-scrolled: rgba(12, 21, 25, 0.82);
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  --texture-opacity: 0.14;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Light theme                                                            */
+/* ---------------------------------------------------------------------- */
+[data-theme="light"] {
+  --bg-base: #f7efe4;
+  --bg-elevated: #fbf6ee;
+  --bg-gradient: linear-gradient(180deg, #f9f2e7 0%, #f4ead9 100%);
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --border: rgba(114, 75, 57, 0.14);
+  --border-strong: rgba(114, 75, 57, 0.28);
+
+  --text-primary: #211712;
+  --text-secondary: #4a3b32;
+  --text-muted: #8a7768;
+
+  --accent: var(--coffee);
+  --accent-contrast: #fbf6ee;
+  --overlay-scrim: rgba(30, 20, 14, 0.45);
+  --navbar-bg: rgba(247, 239, 228, 0.6);
+  --navbar-bg-scrolled: rgba(251, 246, 238, 0.88);
+  --shadow: 0 20px 50px rgba(114, 75, 57, 0.14);
+  --texture-opacity: 0.05;
+}

@@ -1,0 +1,197 @@
+/* ==========================================================================
+   Menu — infinite horizontal scroll-snap carousel
+   Each drink is a full-width "slide" card in a flex row. The row scrolls
+   natively (touch swipe, trackpad, mouse-drag via JS, or the arrows) and
+   CSS scroll-snap locks whichever card is nearest dead-center. carousel.js
+   clones the first/last card at each end and silently re-centers the
+   scroll position when you land on a clone, which is what makes the loop
+   feel infinite instead of hitting a hard edge.
+   ========================================================================== */
+.menu { position: relative; }
+.menu .wrap { position: relative; z-index: 1; }
+
+.carousel {
+  position: relative;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.carousel__viewport {
+  flex: 1;
+  min-width: 0;
+}
+
+.carousel__track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  cursor: grab;
+  border-radius: var(--radius-md);
+}
+.carousel__track::-webkit-scrollbar { display: none; }
+.carousel__track.is-dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
+
+/* ---- Card (one full slide) ---- */
+.carousel__card {
+  position: relative;
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: var(--space-lg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  isolation: isolate;
+  /* --c1/--c2/--c3 are set inline per card from products.js */
+  background: linear-gradient(135deg, var(--c1), var(--c2), var(--c3));
+}
+
+.carousel__card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 0%, transparent 38%, var(--bg-base) 92%);
+  opacity: 0.78;
+}
+[data-theme="light"] .carousel__card::after {
+  background: linear-gradient(180deg, transparent 0%, transparent 38%, var(--bg-elevated) 92%);
+}
+
+.carousel__card > * { position: relative; z-index: 1; }
+
+/* ---- Visual (image) ---- */
+.card__visual {
+  position: relative;
+  width: clamp(230px, 26vw + 130px, 380px);
+  height: clamp(230px, 26vw + 130px, 380px);
+  margin-inline: auto;
+  display: grid;
+  place-items: center;
+}
+.card__visual img {
+  max-width: 62%;
+  max-height: 62%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.35));
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* ---- Info ---- */
+.card__info { display: flex; flex-direction: column; gap: 0.9rem; }
+
+.card__index {
+  font-size: var(--fs-small);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.card__name {
+  font-size: var(--fs-h2);
+  line-height: 1.05;
+}
+
+.card__tagline {
+  color: var(--text-secondary);
+  max-width: 40ch;
+  font-size: 1.02rem;
+}
+
+.card__ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+}
+.card__ingredient {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.75rem 0.4rem 0.5rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--bg-base) 70%, transparent);
+  border: 1px solid var(--border);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  backdrop-filter: blur(6px);
+}
+.card__ingredient svg { width: 17px; height: 17px; color: var(--accent); flex-shrink: 0; }
+
+.card__footer {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: var(--space-sm);
+  flex-wrap: wrap;
+}
+.card__price {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--text-primary);
+}
+.card__price sup { font-size: 1rem; opacity: 0.7; }
+
+/* ---- Arrows ---- */
+.carousel__arrow {
+  flex-shrink: 0;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--bg-base);
+  border: 1px solid var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+.carousel__arrow:hover { background: var(--accent); color: var(--accent-contrast); }
+.carousel__arrow svg { width: 20px; height: 20px; }
+
+@media (max-width: 719px) {
+  .carousel__arrow { display: none; }
+}
+
+/* ---- Dots ---- */
+.carousel__dots {
+  position: absolute;
+  left: 0; right: 0; bottom: -2.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.carousel__dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--border-strong);
+  transition: background-color var(--dur-fast) var(--ease), width var(--dur-fast) var(--ease);
+}
+.carousel__dot.is-active { background: var(--accent); width: 22px; border-radius: 999px; }
+
+/* ---------------------------------------------------------------------- */
+@media (min-width: 720px) {
+  .carousel__card { grid-template-columns: 0.95fr 1fr; text-align: left; }
+  .carousel__card::after {
+    background: linear-gradient(90deg, transparent 0%, transparent 42%, var(--bg-base) 96%);
+  }
+  [data-theme="light"] .carousel__card::after {
+    background: linear-gradient(90deg, transparent 0%, transparent 42%, var(--bg-elevated) 96%);
+  }
+}
+
+@media (min-width: 960px) {
+  .carousel__card { padding-inline: clamp(2rem, 5vw, 4.5rem); }
+}

@@ -1,0 +1,54 @@
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer {
+  position: relative;
+  border-top: 1px solid var(--border);
+  padding-block: var(--space-lg) var(--space-md);
+  background: var(--bg-elevated);
+}
+
+.footer__top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  padding-bottom: var(--space-lg);
+}
+
+.footer__brand { max-width: 320px; }
+.footer__brand .navbar__logo { margin-bottom: 0.9rem; }
+.footer__brand p { color: var(--text-muted); font-size: 0.92rem; }
+
+.footer__col h5 {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.9rem;
+}
+.footer__col ul { display: flex; flex-direction: column; gap: 0.6rem; }
+.footer__col a { color: var(--text-secondary); font-size: 0.92rem; transition: color var(--dur-fast) var(--ease); }
+.footer__col a:hover { color: var(--accent); }
+
+.footer__social { display: flex; gap: 0.6rem; }
+.footer__social a {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  display: grid; place-items: center;
+  transition: background-color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.footer__social a:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-contrast); }
+.footer__social svg { width: 17px; height: 17px; }
+
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  justify-content: space-between;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}

@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Black Coffee — Hand-Crafted Roasters</title>
+    <meta
+      name="description"
+      content="Black Coffee: small-batch hand roasting, a menu worth lingering over, and a warm room in the middle of town."
+    />
+    <meta name="theme-color" content="#0c1519" />
+    <link rel="icon" href="assets/img/logo-small.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/hero.css" />
+    <link rel="stylesheet" href="css/carousel.css" />
+    <link rel="stylesheet" href="css/about.css" />
+    <link rel="stylesheet" href="css/locate.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/order-form.css" />
+  </head>
+  <body>
+    <!-- ============================= NAVBAR ============================= -->
+    <header class="navbar" id="navbar">
+      <div class="navbar__inner wrap">
+        <a href="#home" class="navbar__logo">
+          <img src="assets/img/logo-small.png" alt="Black Coffee" />
+          <span>Black Coffee</span>
+        </a>
+
+        <nav class="navbar__nav" id="navbarNav" aria-label="Main navigation">
+          <span class="navbar__pill" id="navPill" aria-hidden="true"></span>
+          <a href="#home" class="navbar__link" data-nav="home">Home</a>
+          <a href="#menu" class="navbar__link" data-nav="menu">Menu</a>
+          <a href="#about" class="navbar__link" data-nav="about">About</a>
+          <a href="#locate" class="navbar__link" data-nav="locate">Locate</a>
+        </nav>
+
+        <div class="navbar__actions">
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            aria-label="Toggle theme"
+            aria-pressed="false"
+          >
+            <span class="icon-moon" data-icon="moon"></span>
+            <span class="icon-sun" data-icon="sun"></span>
+          </button>
+          <button
+            class="navbar__burger"
+            id="burgerBtn"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="navbarNav"
+          >
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============================== HERO =============================== -->
+    <section class="hero" id="home">
+      <div
+        class="hero__bg"
+        role="img"
+        aria-label="Warm, low-lit coffeehouse interior"
+      ></div>
+      <div class="hero__scrim"></div>
+
+      <div class="wrap hero__content">
+        <span class="hero__badge"
+          ><span class="dot"></span>Open now · 08:00–21:00</span
+        >
+        <h1 class="hero__title">
+          Coffee, roasted by hand,<br class="hide-mobile" />
+          for people <em>in no hurry</em>
+        </h1>
+        <p class="hero__subtitle">
+          We source the beans ourselves, roast in small batches, and brew every
+          cup fresh — come taste the difference.
+        </p>
+        <div class="hero__actions">
+          <a href="#menu" class="btn btn--primary">View the menu</a>
+          <a href="#locate" class="btn btn--ghost">Find us</a>
+        </div>
+      </div>
+
+      <div class="hero__scrollcue">
+        <span>Scroll</span>
+        <svg
+          viewBox="0 0 16 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
+          <rect x="1" y="1" width="14" height="22" rx="7" />
+          <circle cx="8" cy="8" r="1.6" fill="currentColor" stroke="none" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- ============================== MENU ================================ -->
+    <section class="menu section" id="menu">
+      <div class="texture"></div>
+
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Menu</span>
+          <h2>A menu worth scrolling to the end</h2>
+          <p>
+            Eight drinks, each with its own character — from a classic affogato
+            to a banana smoothie. Scroll, pick one, order it.
+          </p>
+        </div>
+
+        <div class="carousel" id="carousel">
+          <button
+            class="carousel__arrow carousel__arrow--prev"
+            aria-label="Previous drink"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M15 5l-7 7 7 7" />
+            </svg>
+          </button>
+
+          <div class="carousel__viewport">
+            <div class="carousel__track" id="carouselTrack" tabindex="0">
+              <!-- carousel.js renders one full .carousel__card per drink here,
+               plus a clone of the last/first card at each end for the
+               seamless infinite loop -->
+            </div>
+          </div>
+
+          <button
+            class="carousel__arrow carousel__arrow--next"
+            aria-label="Next drink"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          <div class="carousel__dots" id="carouselDots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== ABOUT =============================== -->
+    <section class="about section" id="about">
+      <div class="texture"></div>
+      <div class="wrap">
+        <div class="about__text">
+          <span class="eyebrow">About</span>
+          <h2>Our own roast, our own rules</h2>
+          <p>
+            Black Coffee started as a small roastery in a basement — today it's
+            a place people come to not just for coffee, but for quiet,
+            conversation, or a page of a book. We buy beans directly from
+            farmers, roast them ourselves, and never hold a batch longer than
+            two weeks.
+          </p>
+          <p>
+            Our baristas don't just pour coffee — they remember how you take it.
+          </p>
+
+          <div class="about__stats">
+            <div class="about__stat">
+              <span class="num">6</span>
+              <span class="label">years roasting</span>
+            </div>
+            <div class="about__stat">
+              <span class="num">12</span>
+              <span class="label">bean origins</span>
+            </div>
+            <div class="about__stat">
+              <span class="num">100%</span>
+              <span class="label">roasted in-house</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about__visual">
+          <div class="about__frame">
+            <img
+              src="assets/img/hero-bg.jpg"
+              alt="Interior of the Black Coffee roastery"
+              loading="lazy"
+            />
+          </div>
+          <div class="about__card">
+            <span class="quote-mark">“</span>
+            <p>
+              The best coffee is the one that never rushes you to finish it.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== LOCATE ================================ -->
+    <section class="locate section" id="locate">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Locate</span>
+          <h2>Find us</h2>
+          <p>
+            Stop by — the window table is almost always free in the morning.
+          </p>
+        </div>
+
+        <div class="locate__grid">
+          <div class="locate__map">
+            <svg
+              viewBox="0 0 400 320"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1"
+            >
+              <path d="M0 60H400M0 130H400M0 200H400M0 270H400" opacity=".25" />
+              <path d="M60 0V320M140 0V320M220 0V320M300 0V320" opacity=".25" />
+            </svg>
+            <div class="locate__pin"><span class="pin-dot"></span></div>
+          </div>
+
+          <div class="locate__details">
+            <div class="locate__row">
+              <span data-icon="pin"></span>
+              <div>
+                <h4>Address</h4>
+                <p>ul. Hlavná 12, Nové Mesto nad Váhom, Slovakia</p>
+              </div>
+            </div>
+            <div class="locate__row">
+              <span data-icon="clock"></span>
+              <div>
+                <h4>Hours</h4>
+                <dl class="locate__hours">
+                  <dt>Mon–Fri</dt>
+                  <dd>08:00–21:00</dd>
+                  <dt>Sat–Sun</dt>
+                  <dd>09:00–20:00</dd>
+                </dl>
+              </div>
+            </div>
+            <div class="locate__row">
+              <span data-icon="phone"></span>
+              <div>
+                <h4>Phone</h4>
+                <p><a href="tel:+421900000000">+421 900 000 000</a></p>
+              </div>
+            </div>
+
+            <div class="locate__actions">
+              <a href="#" class="btn btn--primary">Get directions</a>
+              <a href="tel:+421900000000" class="btn btn--ghost">Call us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== FOOTER ================================ -->
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer__top">
+          <div class="footer__brand">
+            <a href="#home" class="navbar__logo">
+              <img src="assets/img/logo-small.png" alt="Black Coffee" />
+              <span>Black Coffee</span>
+            </a>
+            <p>Roasted by hand. Brewed with care.</p>
+          </div>
+
+          <div class="footer__col">
+            <h5>Navigation</h5>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#menu">Menu</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#locate">Locate</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h5>Contact</h5>
+            <ul>
+              <li><a href="tel:+421900000000">+421 900 000 000</a></li>
+              <li>
+                <a href="mailto:hello@blackcoffee.sk">hello@blackcoffee.sk</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h5>Follow us</h5>
+            <div class="footer__social">
+              <a href="#" aria-label="Instagram" data-icon="instagram"></a>
+              <a href="#" aria-label="Facebook" data-icon="facebook"></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <span
+            >© <span id="year"></span> Black Coffee. All rights reserved.</span
+          >
+          <span>Made with love for coffee.</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/icons.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/order-form.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
