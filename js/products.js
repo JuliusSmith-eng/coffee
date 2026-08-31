@@ -130,7 +130,7 @@ const PRODUCTS = [
     tagline: "Small Cup, Unmatched Intensity.",
     price: "3.00",
     image: "assets/products/Espresso.png",
-    gradient: ["#ebd9a8", "#d8b978", "#fffdf8"],
+    gradient: ["#e0d6d6", "#352910", "#111111"],
     ingredients: [{ icon: "espresso", label: "Espresso" }],
   },
 ];
