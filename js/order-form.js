@@ -49,8 +49,18 @@ const OrderForm = (() => {
     const name = form.elements.name;
     const phone = form.elements.phone;
     let ok = true;
-    ok = validateField(name, name.value.trim().length > 1, "Please enter your name.") && ok;
-    ok = validateField(phone, /^[+\d][\d\s()-]{6,}$/.test(phone.value.trim()), "Please enter a valid phone number.") && ok;
+    ok =
+      validateField(
+        name,
+        name.value.trim().length > 1,
+        "Please enter your name.",
+      ) && ok;
+    ok =
+      validateField(
+        phone,
+        /^[+\d][\d\s()-]{6,}$/.test(phone.value.trim()),
+        "Please enter a valid phone number.",
+      ) && ok;
     return ok;
   }
 
@@ -87,8 +97,13 @@ const OrderForm = (() => {
     form.reset();
     setQty(1);
     setSize("Regular");
-    form.querySelectorAll(".order-field").forEach((f) => f.classList.remove("has-error"));
+    form
+      .querySelectorAll(".order-field")
+      .forEach((f) => f.classList.remove("has-error"));
     modal.classList.remove("is-success");
+    const doneBtn = modal.querySelector("#orderCloseSuccessBtn");
+    doneBtn.classList.remove("is-loading", "is-success");
+    doneBtn.disabled = false;
   }
 
   function open(activeProduct) {
@@ -96,7 +111,8 @@ const OrderForm = (() => {
     reset();
     modal.querySelector("#orderProductImg").src = product.image;
     modal.querySelector("#orderProductName").textContent = product.name;
-    modal.querySelector("#orderProductPrice").innerHTML = `<sup>&euro;</sup>${product.price}`;
+    modal.querySelector("#orderProductPrice").innerHTML =
+      `<sup>&euro;</sup>${product.price}`;
     updateTotal();
 
     backdrop.classList.add("is-open");
@@ -178,7 +194,11 @@ const OrderForm = (() => {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
           <h3>Order received</h3>
           <p id="orderSuccessText"></p>
-          <button type="button" class="btn btn--ghost" id="orderCloseSuccessBtn">Close</button>
+          <button type="button" class="done-btn" id="orderCloseSuccessBtn">
+            <span class="done-btn__spinner" aria-hidden="true"></span>
+            <span class="done-btn__icon" aria-hidden="true">${getIcon("car")}</span>
+            <span class="done-btn__label">Done</span>
+          </button>
         </div>
       </div>
     `;
@@ -187,18 +207,40 @@ const OrderForm = (() => {
     form = backdrop.querySelector("#orderForm");
   }
 
+  function playDoneAnimation(btn) {
+    if (btn.classList.contains("is-loading")) return; // already animating
+    btn.disabled = true;
+    btn.classList.add("is-loading");
+    setTimeout(() => {
+      btn.classList.remove("is-loading");
+      btn.classList.add("is-success");
+      setTimeout(() => {
+        close();
+        // reset so the next order shows the idle state again
+        btn.classList.remove("is-success");
+        btn.disabled = false;
+      }, 500);
+    }, 800);
+  }
+
   function init() {
     buildMarkup();
 
-    modal.querySelector("#qtyMinus").addEventListener("click", () => setQty(qty - 1));
-    modal.querySelector("#qtyPlus").addEventListener("click", () => setQty(qty + 1));
+    modal
+      .querySelector("#qtyMinus")
+      .addEventListener("click", () => setQty(qty - 1));
+    modal
+      .querySelector("#qtyPlus")
+      .addEventListener("click", () => setQty(qty + 1));
     modal.querySelectorAll(".order-size").forEach((btn) => {
       btn.addEventListener("click", () => setSize(btn.dataset.size));
     });
 
     form.addEventListener("submit", onSubmit);
     modal.querySelector("#orderCloseBtn").addEventListener("click", close);
-    modal.querySelector("#orderCloseSuccessBtn").addEventListener("click", close);
+    modal
+      .querySelector("#orderCloseSuccessBtn")
+      .addEventListener("click", (e) => playDoneAnimation(e.currentTarget));
     backdrop.addEventListener("click", (e) => {
       if (e.target === backdrop) close();
     });
@@ -206,14 +248,14 @@ const OrderForm = (() => {
       if (e.key === "Escape" && backdrop.classList.contains("is-open")) close();
     });
 
-    // Each carousel card has its own "Add to order" button (identified by
-    // data-real-index), plus the carousel keeps clones of the edge cards
-    // for the infinite loop — delegate from the document so newly rendered
-    // cards are covered without re-binding anything.
-    document.addEventListener("click", (e) => {
-      const btn = e.target.closest(".card__add-btn");
-      if (btn) open(PRODUCTS[Number(btn.dataset.realIndex)]);
-    });
+    // Single shared "Add to order" button — always reflects whichever
+    // drink is currently active in the carousel.
+    const trigger = document.getElementById("addToOrderBtn");
+    if (trigger) {
+      trigger.addEventListener("click", () =>
+        open(Carousel.getActiveProduct()),
+      );
+    }
   }
 
   return { init, open, close };

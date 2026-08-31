@@ -1,8 +1,13 @@
 /* ==========================================================================
    Locate
    ========================================================================== */
-.locate { position: relative; }
-.locate .wrap { position: relative; z-index: 1; }
+.locate {
+  position: relative;
+}
+.locate .wrap {
+  position: relative;
+  z-index: 1;
+}
 
 .locate__grid {
   display: grid;
@@ -17,28 +22,47 @@
 .locate__map {
   position: relative;
   min-height: 320px;
-  background:
-    radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 60%),
-    var(--bg-base);
   overflow: hidden;
+  background: var(--bg-base);
 }
-.locate__map svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.55; }
-.locate__pin {
+.locate__map-frame {
   position: absolute;
-  top: 46%; left: 48%;
-  transform: translate(-50%, -100%);
-  display: grid;
-  place-items: center;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(0.35) contrast(1.05);
 }
-.locate__pin .pin-dot {
-  width: 18px; height: 18px;
-  border-radius: 50% 50% 50% 0;
-  transform: rotate(-45deg);
+/* Tint the map to sit comfortably in the dark theme instead of a bright
+   white rectangle punched into the page. */
+[data-theme="dark"] .locate__map-frame {
+  filter: grayscale(0.5) invert(0.92) contrast(0.9) brightness(0.95)
+    hue-rotate(180deg);
+}
+.locate__map-link {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.85rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--bg-base) 78%, transparent);
+  border: 1px solid var(--border-strong);
+  backdrop-filter: blur(6px);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  z-index: 1;
+  transition: background-color var(--dur-fast) var(--ease);
+}
+.locate__map-link:hover {
   background: var(--accent);
-  box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
 }
 
-.locate__details { padding: clamp(1.5rem, 4vw, 3rem); }
+.locate__details {
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
 
 .locate__row {
   display: flex;
@@ -46,11 +70,29 @@
   padding-block: 1rem;
   border-bottom: 1px solid var(--border);
 }
-.locate__row:first-of-type { padding-top: 0; }
-.locate__row:last-of-type { border-bottom: none; }
-.locate__row svg { width: 22px; height: 22px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
-.locate__row h4 { font-family: var(--font-body); font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; }
-.locate__row p { color: var(--text-secondary); font-size: 0.92rem; }
+.locate__row:first-of-type {
+  padding-top: 0;
+}
+.locate__row:last-of-type {
+  border-bottom: none;
+}
+.locate__row svg {
+  width: 22px;
+  height: 22px;
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.locate__row h4 {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.locate__row p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
 
 .locate__hours {
   display: grid;
@@ -59,10 +101,20 @@
   font-size: 0.92rem;
   color: var(--text-secondary);
 }
-.locate__hours dt { color: var(--text-primary); font-weight: 600; }
+.locate__hours dt {
+  color: var(--text-primary);
+  font-weight: 600;
+}
 
-.locate__actions { margin-top: var(--space-md); display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.locate__actions {
+  margin-top: var(--space-md);
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
 
 @media (min-width: 900px) {
-  .locate__grid { grid-template-columns: 1.1fr 1fr; }
+  .locate__grid {
+    grid-template-columns: 1.1fr 1fr;
+  }
 }

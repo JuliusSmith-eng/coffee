@@ -52,8 +52,12 @@
             aria-label="Toggle theme"
             aria-pressed="false"
           >
-            <span class="icon-moon" data-icon="moon"></span>
-            <span class="icon-sun" data-icon="sun"></span>
+            <span class="theme-toggle__track">
+              <span class="theme-toggle__knob">
+                <span class="icon-cup" data-icon="cup"></span>
+                <span class="icon-bean" data-icon="bean"></span>
+              </span>
+            </span>
           </button>
           <button
             class="navbar__burger"
@@ -122,8 +126,41 @@
             to a banana smoothie. Scroll, pick one, order it.
           </p>
         </div>
+      </div>
 
-        <div class="carousel" id="carousel">
+      <div
+        class="carousel"
+        id="carousel"
+        tabindex="0"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Drink menu"
+      >
+        <div class="carousel__backgrounds" id="carouselBackgrounds">
+          <!-- carousel.js renders one crossfading gradient layer per drink -->
+        </div>
+        <div class="carousel__scrim"></div>
+
+        <div class="carousel__inner wrap">
+          <div class="carousel__content">
+            <span class="carousel__index" id="carouselIndex">01 / 08</span>
+            <h3 class="carousel__name" id="carouselName"></h3>
+            <p class="carousel__tagline" id="carouselTagline"></p>
+            <ul class="carousel__ingredients" id="carouselIngredients"></ul>
+            <div class="carousel__footer">
+              <span class="carousel__price" id="carouselPrice"></span>
+              <button class="btn btn--primary" id="addToOrderBtn">
+                Add to order
+              </button>
+            </div>
+          </div>
+
+          <div class="carousel__images" id="carouselImages">
+            <!-- carousel.js renders one <img> per drink, classed active/previous/next/inactive -->
+          </div>
+        </div>
+
+        <div class="carousel__nav">
           <button
             class="carousel__arrow carousel__arrow--prev"
             aria-label="Previous drink"
@@ -139,15 +176,7 @@
               <path d="M15 5l-7 7 7 7" />
             </svg>
           </button>
-
-          <div class="carousel__viewport">
-            <div class="carousel__track" id="carouselTrack" tabindex="0">
-              <!-- carousel.js renders one full .carousel__card per drink here,
-               plus a clone of the last/first card at each end for the
-               seamless infinite loop -->
-            </div>
-          </div>
-
+          <div class="carousel__dots" id="carouselDots"></div>
           <button
             class="carousel__arrow carousel__arrow--next"
             aria-label="Next drink"
@@ -163,8 +192,6 @@
               <path d="M9 5l7 7-7 7" />
             </svg>
           </button>
-
-          <div class="carousel__dots" id="carouselDots"></div>
         </div>
       </div>
     </section>
@@ -206,7 +233,7 @@
         <div class="about__visual">
           <div class="about__frame">
             <img
-              src="assets/img/hero-bg.jpg"
+              src="assets/img/coffeeroom.webp"
               alt="Interior of the Black Coffee roastery"
               loading="lazy"
             />
@@ -234,16 +261,21 @@
 
         <div class="locate__grid">
           <div class="locate__map">
-            <svg
-              viewBox="0 0 400 320"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1"
+            <iframe
+              class="locate__map-frame"
+              title="Black Coffee location on the map"
+              src="https://maps.google.com/maps?q=47.784102,35.210283&z=15&output=embed"
+              loading="lazy"
+              width="100%"
+              height="100%"
+            ></iframe>
+            <a
+              class="locate__map-link"
+              href="https://www.google.com/maps?q=47.784102,35.210283"
+              target="_blank"
+              rel="noopener"
+              >Open in Maps</a
             >
-              <path d="M0 60H400M0 130H400M0 200H400M0 270H400" opacity=".25" />
-              <path d="M60 0V320M140 0V320M220 0V320M300 0V320" opacity=".25" />
-            </svg>
-            <div class="locate__pin"><span class="pin-dot"></span></div>
           </div>
 
           <div class="locate__details">
@@ -251,7 +283,7 @@
               <span data-icon="pin"></span>
               <div>
                 <h4>Address</h4>
-                <p>ul. Hlavná 12, Nové Mesto nad Váhom, Slovakia</p>
+                <p>Zaporizhzhia, Ukraine</p>
               </div>
             </div>
             <div class="locate__row">
@@ -275,7 +307,13 @@
             </div>
 
             <div class="locate__actions">
-              <a href="#" class="btn btn--primary">Get directions</a>
+              <a
+                href="https://www.google.com/maps/dir/?api=1&destination=47.784102,35.210283"
+                target="_blank"
+                rel="noopener"
+                class="btn btn--primary"
+                >Get directions</a
+              >
               <a href="tel:+421900000000" class="btn btn--ghost">Call us</a>
             </div>
           </div>

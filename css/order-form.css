@@ -15,7 +15,10 @@
   pointer-events: none;
   transition: opacity var(--dur-med) var(--ease);
 }
-.order-backdrop.is-open { opacity: 1; pointer-events: auto; }
+.order-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
 
 .order-modal {
   width: min(560px, 100%);
@@ -28,25 +31,38 @@
   padding: clamp(1.5rem, 3.4vw, 2.1rem);
   transform: translateY(14px) scale(0.98);
   opacity: 0;
-  transition: transform var(--dur-med) var(--ease), opacity var(--dur-med) var(--ease);
+  transition:
+    transform var(--dur-med) var(--ease),
+    opacity var(--dur-med) var(--ease);
 }
-.order-backdrop.is-open .order-modal { transform: translateY(0) scale(1); opacity: 1; }
+.order-backdrop.is-open .order-modal {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
 
 .order-modal__close {
   position: absolute;
   top: 14px;
   right: 14px;
-  width: 38px; height: 38px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   border: 1px solid var(--border-strong);
   display: grid;
   place-items: center;
   color: var(--text-primary);
 }
-.order-modal__close svg { width: 16px; height: 16px; }
-.order-modal__close:hover { background: var(--border); }
+.order-modal__close svg {
+  width: 16px;
+  height: 16px;
+}
+.order-modal__close:hover {
+  background: var(--border);
+}
 
-.order-modal { position: relative; }
+.order-modal {
+  position: relative;
+}
 
 .order-modal__product {
   display: flex;
@@ -57,21 +73,26 @@
   border-bottom: 1px solid var(--border);
 }
 .order-modal__product img {
-  width: 64px; height: 64px;
+  width: 64px;
+  height: 64px;
   object-fit: contain;
   border-radius: 50%;
   background: var(--bg-base);
   border: 1px solid var(--border);
   padding: 4px;
 }
-.order-modal__product h3 { font-size: 1.25rem; }
+.order-modal__product h3 {
+  font-size: 1.25rem;
+}
 .order-modal__product .price {
   font-family: var(--font-display);
   color: var(--accent);
   font-size: 1.1rem;
 }
 
-.order-field { margin-bottom: 0.9rem; }
+.order-field {
+  margin-bottom: 0.9rem;
+}
 .order-field label {
   display: block;
   font-size: 0.82rem;
@@ -94,15 +115,37 @@
   transition: border-color var(--dur-fast) var(--ease);
 }
 .order-field input:focus-visible,
-.order-field textarea:focus-visible { border-color: var(--accent); }
-.order-field textarea { resize: vertical; min-height: 60px; }
-.order-field .hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.35rem; }
-.order-field .error { font-size: 0.78rem; color: #e0785f; margin-top: 0.35rem; display: none; }
+.order-field textarea:focus-visible {
+  border-color: var(--accent);
+}
+.order-field textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+.order-field .hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+}
+.order-field .error {
+  font-size: 0.78rem;
+  color: #e0785f;
+  margin-top: 0.35rem;
+  display: none;
+}
 .order-field.has-error input,
-.order-field.has-error textarea { border-color: #e0785f; }
-.order-field.has-error .error { display: block; }
+.order-field.has-error textarea {
+  border-color: #e0785f;
+}
+.order-field.has-error .error {
+  display: block;
+}
 
-.order-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+.order-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+}
 
 .order-qty {
   display: inline-flex;
@@ -113,19 +156,27 @@
   overflow: hidden;
 }
 .order-qty button {
-  width: 40px; height: 40px;
-  display: grid; place-items: center;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
   color: var(--text-primary);
   font-size: 1.1rem;
 }
-.order-qty button:hover { background: var(--border); }
+.order-qty button:hover {
+  background: var(--border);
+}
 .order-qty output {
   min-width: 34px;
   text-align: center;
   font-weight: 700;
 }
 
-.order-sizes { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.order-sizes {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
 .order-size {
   padding: 0.5rem 0.95rem;
   border-radius: var(--radius-pill);
@@ -133,7 +184,10 @@
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-secondary);
-  transition: border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease);
+  transition:
+    border-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
 }
 .order-size.is-selected {
   border-color: var(--accent);
@@ -157,7 +211,10 @@
   color: var(--text-primary);
 }
 
-.order-modal__submit { width: 100%; margin-top: 1.25rem; }
+.order-modal__submit {
+  width: 100%;
+  margin-top: 1.25rem;
+}
 
 .order-modal__success {
   display: none;
@@ -165,18 +222,156 @@
   padding: 1rem 0 0.25rem;
 }
 .order-modal__success svg {
-  width: 52px; height: 52px;
+  width: 52px;
+  height: 52px;
   color: var(--accent);
   margin-bottom: 1rem;
 }
-.order-modal__success h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
-.order-modal__success p { color: var(--text-secondary); font-size: 0.95rem; }
-.order-modal__success .btn { margin-top: 1.5rem; }
+.order-modal__success h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+.order-modal__success p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
 
 .order-modal.is-success .order-modal__form,
-.order-modal.is-success .order-modal__product { display: none; }
-.order-modal.is-success .order-modal__success { display: block; }
+.order-modal.is-success .order-modal__product {
+  display: none;
+}
+.order-modal.is-success .order-modal__success {
+  display: block;
+}
 
 @media (max-width: 420px) {
-  .order-row { grid-template-columns: 1fr; }
+  .order-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   "Done" button — a small loading/success morph, in the site's accent
+   color with a neon glow. Idle pill → collapses to a spinning ring while
+   the order "drives off" → expands back into a glowing pill before the
+   modal closes.
+   ========================================================================== */
+.done-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  width: 138px;
+  height: 52px;
+  margin-top: 1.5rem;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  overflow: hidden;
+  box-shadow:
+    0 0 8px color-mix(in srgb, var(--accent) 55%, transparent),
+    inset 0 0 10px color-mix(in srgb, var(--accent) 10%, transparent);
+  transition:
+    width 0.45s cubic-bezier(0.65, 0, 0.35, 1),
+    background-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+}
+.done-btn:hover {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.done-btn:disabled {
+  cursor: default;
+}
+
+.done-btn__icon {
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.done-btn__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.done-btn__label {
+  white-space: nowrap;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Spinning ring, hidden until .is-loading */
+.done-btn__spinner {
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* ---- Loading: collapse to a circle, ring spins ---- */
+.done-btn.is-loading {
+  width: 52px;
+  box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 75%, transparent);
+}
+.done-btn.is-loading .done-btn__label {
+  opacity: 0;
+  transform: scale(0.6);
+  position: absolute;
+}
+.done-btn.is-loading .done-btn__spinner {
+  opacity: 1;
+  animation: done-spin 0.85s linear infinite;
+}
+
+@keyframes done-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---- Success: expand back out, brighter glow pulse ---- */
+.done-btn.is-success {
+  width: 138px;
+  background: color-mix(in srgb, var(--accent) 32%, transparent);
+  box-shadow:
+    0 0 22px color-mix(in srgb, var(--accent) 85%, transparent),
+    0 0 44px color-mix(in srgb, var(--accent) 45%, transparent);
+  animation: done-pulse 0.5s ease;
+}
+.done-btn.is-success .done-btn__label {
+  opacity: 1;
+  transform: scale(1);
+  position: static;
+}
+
+@keyframes done-pulse {
+  0% {
+    transform: scale(0.9);
+  }
+  55% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .done-btn,
+  .done-btn__spinner,
+  .done-btn.is-loading,
+  .done-btn.is-success {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
 }

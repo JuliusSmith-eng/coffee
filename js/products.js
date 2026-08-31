@@ -9,7 +9,8 @@ const PRODUCTS = [
   {
     id: "affogato",
     name: "Vanilla Affogato",
-    tagline: "A double espresso poured over a scoop of vanilla — dessert and coffee in one glass.",
+    tagline:
+      "A double espresso poured over a scoop of vanilla — dessert and coffee in one glass.",
     price: "4.80",
     image: "assets/products/Affogato.png",
     gradient: ["#fbd9b7", "#f3b6a3", "#e9d3c3"],
@@ -23,7 +24,8 @@ const PRODUCTS = [
   {
     id: "coconut",
     name: "Coconut Cold Brew",
-    tagline: "Slow-steeped cold brew with coconut milk for a light, tropical sweetness.",
+    tagline:
+      "Slow-steeped cold brew with coconut milk for a light, tropical sweetness.",
     price: "4.30",
     image: "assets/products/Coconut.png",
     gradient: ["#fdf6ec", "#c9a06a", "#8b5e3c"],
@@ -37,7 +39,8 @@ const PRODUCTS = [
   {
     id: "dalgona",
     name: "Dalgona",
-    tagline: "Whipped coffee cream layered over cold milk — a drink you sip with your eyes first.",
+    tagline:
+      "Whipped coffee cream layered over cold milk — a drink you sip with your eyes first.",
     price: "3.90",
     image: "assets/products/Dalgona.png",
     gradient: ["#f0c892", "#c78a4a", "#6f3f1e"],
@@ -50,7 +53,8 @@ const PRODUCTS = [
   {
     id: "honey-cinnamon",
     name: "Honey Cinnamon Latte",
-    tagline: "Warm spice, honey and a soft foam top — a cosy cup for a cold day.",
+    tagline:
+      "Warm spice, honey and a soft foam top — a cosy cup for a cold day.",
     price: "4.50",
     image: "assets/products/HoneyCinnamon.png",
     gradient: ["#f5c451", "#c98a3a", "#7a4a1f"],
@@ -64,7 +68,8 @@ const PRODUCTS = [
   {
     id: "mocha-iced",
     name: "Iced Mocha",
-    tagline: "Espresso and dark chocolate, finished with a cloud of whipped cream.",
+    tagline:
+      "Espresso and dark chocolate, finished with a cloud of whipped cream.",
     price: "4.60",
     image: "assets/products/MochaIced.png",
     gradient: ["#c9a27a", "#7a4f34", "#3b2418"],
@@ -78,7 +83,8 @@ const PRODUCTS = [
   {
     id: "smoothie",
     name: "Banana Smoothie",
-    tagline: "Banana, rolled oats and almond milk blended thick — hearty and filling.",
+    tagline:
+      "Banana, rolled oats and almond milk blended thick — hearty and filling.",
     price: "4.20",
     image: "assets/products/Smoothie.png",
     gradient: ["#f6e27a", "#e3c268", "#fbf3dc"],
@@ -106,7 +112,8 @@ const PRODUCTS = [
   {
     id: "vanilla-latte",
     name: "Vanilla Latte",
-    tagline: "Soft vanilla syrup and steamed milk — a quiet harbour for those who like things simple.",
+    tagline:
+      "Soft vanilla syrup and steamed milk — a quiet harbour for those who like things simple.",
     price: "4.00",
     image: "assets/products/VanilLatte.png",
     gradient: ["#ebd9a8", "#d8b978", "#fffdf8"],
@@ -116,5 +123,14 @@ const PRODUCTS = [
       { icon: "milk", label: "Milk" },
       { icon: "ice", label: "Ice" },
     ],
+  },
+  {
+    id: "espresso",
+    name: "Espresso",
+    tagline: "Small Cup, Unmatched Intensity.",
+    price: "3.00",
+    image: "assets/products/Espresso.png",
+    gradient: ["#ebd9a8", "#d8b978", "#fffdf8"],
+    ingredients: [{ icon: "espresso", label: "Espresso" }],
   },
 ];
