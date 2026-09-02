@@ -32,6 +32,12 @@ const Carousel = (() => {
       (p, i) => `<img src="${p.image}" alt="${p.name}" data-index="${i}" draggable="false">`
     ).join("");
     imageEls = Array.from(els.images.children);
+    // Only reveal each image once its bitmap has actually decoded —
+    // see the matching CSS guard on .carousel__images img:not(.is-loaded).
+    imageEls.forEach((img) => {
+      if (img.complete) img.classList.add("is-loaded");
+      else img.addEventListener("load", () => img.classList.add("is-loaded"), { once: true });
+    });
   }
 
   function buildDots() {

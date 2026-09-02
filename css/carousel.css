@@ -7,9 +7,7 @@
    depth) and inactive (hidden). Name/tagline/ingredients/price swap with
    the active image instead of staying static like the original demo.
    ========================================================================== */
-.menu {
-  position: relative;
-}
+.menu { position: relative; }
 
 .carousel {
   position: relative;
@@ -33,9 +31,7 @@
   opacity: 0;
   transition: opacity 1.6s ease-in-out;
 }
-.carousel__bg.is-active {
-  opacity: 1;
-}
+.carousel__bg.is-active { opacity: 1; }
 
 /* Soft edge fade only — top/bottom on mobile, top/bottom on desktop too
    (kept gentle since the real legibility fix is the content panel below,
@@ -45,22 +41,10 @@
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    var(--bg-base) 0%,
-    transparent 10%,
-    transparent 90%,
-    var(--bg-base) 100%
-  );
+  background: linear-gradient(180deg, var(--bg-base) 0%, transparent 10%, transparent 90%, var(--bg-base) 100%);
 }
 [data-theme="light"] .carousel__scrim {
-  background: linear-gradient(
-    180deg,
-    var(--bg-elevated) 0%,
-    transparent 10%,
-    transparent 90%,
-    var(--bg-elevated) 100%
-  );
+  background: linear-gradient(180deg, var(--bg-elevated) 0%, transparent 10%, transparent 90%, var(--bg-elevated) 100%);
 }
 
 /* ---- Layout ---- */
@@ -91,21 +75,11 @@
   inset: -8% -12%;
   z-index: -1;
   pointer-events: none;
-  background: radial-gradient(
-    65% 60% at 40% 50%,
-    color-mix(in srgb, var(--bg-base) 80%, transparent) 0%,
-    color-mix(in srgb, var(--bg-base) 55%, transparent) 55%,
-    transparent 85%
-  );
+  background: radial-gradient(65% 60% at 40% 50%, color-mix(in srgb, var(--bg-base) 80%, transparent) 0%, color-mix(in srgb, var(--bg-base) 55%, transparent) 55%, transparent 85%);
   filter: blur(34px);
 }
 [data-theme="light"] .carousel__content::before {
-  background: radial-gradient(
-    65% 60% at 40% 50%,
-    color-mix(in srgb, var(--bg-elevated) 84%, transparent) 0%,
-    color-mix(in srgb, var(--bg-elevated) 58%, transparent) 55%,
-    transparent 85%
-  );
+  background: radial-gradient(65% 60% at 40% 50%, color-mix(in srgb, var(--bg-elevated) 84%, transparent) 0%, color-mix(in srgb, var(--bg-elevated) 58%, transparent) 55%, transparent 85%);
 }
 
 .carousel__index {
@@ -114,15 +88,8 @@
   letter-spacing: 0.12em;
   color: var(--text-muted);
 }
-.carousel__name {
-  font-size: var(--fs-h2);
-  line-height: 1.05;
-}
-.carousel__tagline {
-  color: var(--text-secondary);
-  max-width: 42ch;
-  font-size: 1.02rem;
-}
+.carousel__name { font-size: var(--fs-h2); line-height: 1.05; }
+.carousel__tagline { color: var(--text-secondary); max-width: 42ch; font-size: 1.02rem; }
 
 .carousel__ingredients {
   display: flex;
@@ -142,12 +109,7 @@
   color: var(--text-secondary);
   backdrop-filter: blur(6px);
 }
-.carousel__ingredient svg {
-  width: 17px;
-  height: 17px;
-  color: var(--accent);
-  flex-shrink: 0;
-}
+.carousel__ingredient svg { width: 17px; height: 17px; color: var(--accent); flex-shrink: 0; }
 
 .carousel__footer {
   display: flex;
@@ -156,15 +118,8 @@
   margin-top: var(--space-sm);
   flex-wrap: wrap;
 }
-.carousel__price {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  color: var(--text-primary);
-}
-.carousel__price sup {
-  font-size: 1rem;
-  opacity: 0.7;
-}
+.carousel__price { font-family: var(--font-display); font-size: 2rem; color: var(--text-primary); }
+.carousel__price sup { font-size: 1rem; opacity: 0.7; }
 
 /* ---- Image stage: active / next / previous / inactive ---- */
 .carousel__images {
@@ -186,6 +141,13 @@
   transition: all 1.4s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
   -webkit-user-drag: none;
+}
+/* Never show a state's blur/position treatment until the bitmap has
+   actually decoded — otherwise a slow connection can briefly render the
+   browser's broken-image placeholder, which the blur turns into an ugly
+   dark smudge. Overrides every state below until .is-loaded is added. */
+.carousel__images img:not(.is-loaded) {
+  opacity: 0 !important;
 }
 .carousel__images img.active {
   left: 50%;
@@ -224,8 +186,7 @@
   padding-bottom: var(--space-lg);
 }
 .carousel__arrow {
-  width: 44px;
-  height: 44px;
+  width: 44px; height: 44px;
   border-radius: 50%;
   background: color-mix(in srgb, var(--bg-base) 55%, transparent);
   border: 1px solid var(--border-strong);
@@ -235,33 +196,17 @@
   backdrop-filter: blur(6px);
   transition: background-color var(--dur-fast) var(--ease);
 }
-.carousel__arrow:hover {
-  background: var(--accent);
-  color: var(--accent-contrast);
-}
-.carousel__arrow svg {
-  width: 18px;
-  height: 18px;
-}
+.carousel__arrow:hover { background: var(--accent); color: var(--accent-contrast); }
+.carousel__arrow svg { width: 18px; height: 18px; }
 
-.carousel__dots {
-  display: flex;
-  gap: 0.5rem;
-}
+.carousel__dots { display: flex; gap: 0.5rem; }
 .carousel__dot {
-  width: 7px;
-  height: 7px;
+  width: 7px; height: 7px;
   border-radius: 50%;
   background: var(--border-strong);
-  transition:
-    background-color var(--dur-fast) var(--ease),
-    width var(--dur-fast) var(--ease);
+  transition: background-color var(--dur-fast) var(--ease), width var(--dur-fast) var(--ease);
 }
-.carousel__dot.is-active {
-  background: var(--accent);
-  width: 22px;
-  border-radius: 999px;
-}
+.carousel__dot.is-active { background: var(--accent); width: 22px; border-radius: 999px; }
 
 /* overflow:hidden clips the default outward focus ring, so give the
    carousel root an inset ring instead when it receives keyboard focus */
@@ -272,25 +217,10 @@
 
 /* ---------------------------------------------------------------------- */
 @media (min-width: 720px) {
-  .carousel__inner {
-    grid-template-columns: 1fr 1fr;
-    text-align: left;
-    gap: var(--space-2xl);
-  }
-  .carousel__nav {
-    position: absolute;
-    left: var(--edge);
-    right: var(--edge);
-    bottom: var(--space-lg);
-    justify-content: space-between;
-    padding-bottom: 0;
-  }
+  .carousel__inner { grid-template-columns: 1fr 1fr; text-align: left; gap: var(--space-2xl); }
+  .carousel__nav { position: absolute; left: var(--edge); right: var(--edge); bottom: var(--space-lg); justify-content: space-between; padding-bottom: 0; }
 }
 
 @media (min-width: 960px) {
-  .carousel__inner {
-    padding-inline: var(--edge);
-    max-width: var(--container-w);
-    margin-inline: auto;
-  }
+  .carousel__inner { padding-inline: var(--edge); max-width: var(--container-w); margin-inline: auto; }
 }

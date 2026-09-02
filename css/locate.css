@@ -1,13 +1,8 @@
 /* ==========================================================================
    Locate
    ========================================================================== */
-.locate {
-  position: relative;
-}
-.locate .wrap {
-  position: relative;
-  z-index: 1;
-}
+.locate { position: relative; }
+.locate .wrap { position: relative; z-index: 1; }
 
 .locate__grid {
   display: grid;
@@ -36,8 +31,7 @@
 /* Tint the map to sit comfortably in the dark theme instead of a bright
    white rectangle punched into the page. */
 [data-theme="dark"] .locate__map-frame {
-  filter: grayscale(0.5) invert(0.92) contrast(0.9) brightness(0.95)
-    hue-rotate(180deg);
+  filter: grayscale(0.5) invert(0.92) contrast(0.9) brightness(0.95) hue-rotate(180deg);
 }
 .locate__map-link {
   position: absolute;
@@ -54,15 +48,9 @@
   z-index: 1;
   transition: background-color var(--dur-fast) var(--ease);
 }
-.locate__map-link:hover {
-  background: var(--accent);
-  color: var(--accent-contrast);
-  border-color: var(--accent);
-}
+.locate__map-link:hover { background: var(--accent); color: var(--accent-contrast); border-color: var(--accent); }
 
-.locate__details {
-  padding: clamp(1.5rem, 4vw, 3rem);
-}
+.locate__details { padding: clamp(1.5rem, 4vw, 3rem); }
 
 .locate__row {
   display: flex;
@@ -70,29 +58,11 @@
   padding-block: 1rem;
   border-bottom: 1px solid var(--border);
 }
-.locate__row:first-of-type {
-  padding-top: 0;
-}
-.locate__row:last-of-type {
-  border-bottom: none;
-}
-.locate__row svg {
-  width: 22px;
-  height: 22px;
-  color: var(--accent);
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-.locate__row h4 {
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-}
-.locate__row p {
-  color: var(--text-secondary);
-  font-size: 0.92rem;
-}
+.locate__row:first-of-type { padding-top: 0; }
+.locate__row:last-of-type { border-bottom: none; }
+.locate__row svg { width: 22px; height: 22px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+.locate__row h4 { font-family: var(--font-body); font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; }
+.locate__row p { color: var(--text-secondary); font-size: 0.92rem; }
 
 .locate__hours {
   display: grid;
@@ -101,20 +71,10 @@
   font-size: 0.92rem;
   color: var(--text-secondary);
 }
-.locate__hours dt {
-  color: var(--text-primary);
-  font-weight: 600;
-}
+.locate__hours dt { color: var(--text-primary); font-weight: 600; }
 
-.locate__actions {
-  margin-top: var(--space-md);
-  display: flex;
-  gap: 0.8rem;
-  flex-wrap: wrap;
-}
+.locate__actions { margin-top: var(--space-md); display: flex; gap: 0.8rem; flex-wrap: wrap; }
 
 @media (min-width: 900px) {
-  .locate__grid {
-    grid-template-columns: 1.1fr 1fr;
-  }
+  .locate__grid { grid-template-columns: 1.1fr 1fr; }
 }

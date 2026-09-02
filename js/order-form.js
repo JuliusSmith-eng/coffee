@@ -45,22 +45,29 @@ const OrderForm = (() => {
     return condition;
   }
 
+  // Letters (any language) and single spaces between words only — no
+  // digits, no punctuation.
+  function isValidName(value) {
+    const v = value.trim();
+    return v.length >= 2 && /^\p{L}+(?:\s\p{L}+)*$/u.test(v);
+  }
+
+  // Digits plus the usual formatting characters (+, spaces, hyphens,
+  // parentheses), with a realistic total digit count (7–15, covers local
+  // to full international E.164-style numbers).
+  function isValidPhone(value) {
+    const v = value.trim();
+    if (!/^\+?[\d\s()-]+$/.test(v)) return false;
+    const digits = v.replace(/\D/g, "");
+    return digits.length >= 7 && digits.length <= 15;
+  }
+
   function validate() {
     const name = form.elements.name;
     const phone = form.elements.phone;
     let ok = true;
-    ok =
-      validateField(
-        name,
-        name.value.trim().length > 1,
-        "Please enter your name.",
-      ) && ok;
-    ok =
-      validateField(
-        phone,
-        /^[+\d][\d\s()-]{6,}$/.test(phone.value.trim()),
-        "Please enter a valid phone number.",
-      ) && ok;
+    ok = validateField(name, isValidName(name.value), "Letters only, please — no numbers or symbols.") && ok;
+    ok = validateField(phone, isValidPhone(phone.value), "Please enter a valid phone number (7–15 digits).") && ok;
     return ok;
   }
 
@@ -97,9 +104,7 @@ const OrderForm = (() => {
     form.reset();
     setQty(1);
     setSize("Regular");
-    form
-      .querySelectorAll(".order-field")
-      .forEach((f) => f.classList.remove("has-error"));
+    form.querySelectorAll(".order-field").forEach((f) => f.classList.remove("has-error"));
     modal.classList.remove("is-success");
     const doneBtn = modal.querySelector("#orderCloseSuccessBtn");
     doneBtn.classList.remove("is-loading", "is-success");
@@ -111,8 +116,7 @@ const OrderForm = (() => {
     reset();
     modal.querySelector("#orderProductImg").src = product.image;
     modal.querySelector("#orderProductName").textContent = product.name;
-    modal.querySelector("#orderProductPrice").innerHTML =
-      `<sup>&euro;</sup>${product.price}`;
+    modal.querySelector("#orderProductPrice").innerHTML = `<sup>&euro;</sup>${product.price}`;
     updateTotal();
 
     backdrop.classList.add("is-open");
@@ -226,21 +230,36 @@ const OrderForm = (() => {
   function init() {
     buildMarkup();
 
-    modal
-      .querySelector("#qtyMinus")
-      .addEventListener("click", () => setQty(qty - 1));
-    modal
-      .querySelector("#qtyPlus")
-      .addEventListener("click", () => setQty(qty + 1));
+    modal.querySelector("#qtyMinus").addEventListener("click", () => setQty(qty - 1));
+    modal.querySelector("#qtyPlus").addEventListener("click", () => setQty(qty + 1));
     modal.querySelectorAll(".order-size").forEach((btn) => {
       btn.addEventListener("click", () => setSize(btn.dataset.size));
     });
 
+    // Strip disallowed characters as the person types, instead of only
+    // complaining after they hit submit. Bound to keyup/paste too (not just
+    // "input") since some mobile keyboards — predictive text, swipe-typing,
+    // autocorrect suggestions — insert text in ways that don't reliably
+    // fire a plain "input" event on every device.
+    const sanitizeName = (e) => {
+      const el = e.target;
+      const cleaned = el.value.replace(/[^\p{L}\s]/gu, "");
+      if (cleaned !== el.value) el.value = cleaned;
+    };
+    const sanitizePhone = (e) => {
+      const el = e.target;
+      let cleaned = el.value.replace(/[^\d+\-() ]/g, "");
+      if (cleaned.length > 0) cleaned = cleaned[0] + cleaned.slice(1).replace(/\+/g, ""); // only a leading "+" is allowed
+      if (cleaned !== el.value) el.value = cleaned;
+    };
+    ["input", "keyup", "paste", "change", "compositionend"].forEach((evt) => {
+      form.elements.name.addEventListener(evt, sanitizeName);
+      form.elements.phone.addEventListener(evt, sanitizePhone);
+    });
+
     form.addEventListener("submit", onSubmit);
     modal.querySelector("#orderCloseBtn").addEventListener("click", close);
-    modal
-      .querySelector("#orderCloseSuccessBtn")
-      .addEventListener("click", (e) => playDoneAnimation(e.currentTarget));
+    modal.querySelector("#orderCloseSuccessBtn").addEventListener("click", (e) => playDoneAnimation(e.currentTarget));
     backdrop.addEventListener("click", (e) => {
       if (e.target === backdrop) close();
     });
@@ -252,9 +271,7 @@ const OrderForm = (() => {
     // drink is currently active in the carousel.
     const trigger = document.getElementById("addToOrderBtn");
     if (trigger) {
-      trigger.addEventListener("click", () =>
-        open(Carousel.getActiveProduct()),
-      );
+      trigger.addEventListener("click", () => open(Carousel.getActiveProduct()));
     }
   }
 
