@@ -15,10 +15,14 @@
   position: absolute;
   inset: 0;
   z-index: -2;
-  background-image: url("../assets/img/hero-bg.jpg");
+  background-image: url("../assets/img/hero-bg.webp");
   background-size: cover;
   background-position: center 60%;
   transform: scale(1.02);
+}
+
+@media (max-width: 800px) {
+  .hero__bg { background-image: url("../assets/img/hero-bg-800.webp"); }
 }
 
 .hero__scrim {

@@ -199,14 +199,23 @@
 .carousel__arrow:hover { background: var(--accent); color: var(--accent-contrast); }
 .carousel__arrow svg { width: 18px; height: 18px; }
 
-.carousel__dots { display: flex; gap: 0.5rem; }
+.carousel__dots { display: flex; gap: 1.1rem; }
 .carousel__dot {
+  position: relative;
   width: 7px; height: 7px;
   border-radius: 50%;
   background: var(--border-strong);
   transition: background-color var(--dur-fast) var(--ease), width var(--dur-fast) var(--ease);
 }
 .carousel__dot.is-active { background: var(--accent); width: 22px; border-radius: 999px; }
+/* Invisible 24x24 hit area so the tiny dots are easy to tap. */
+.carousel__dot::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 24px; height: 24px;
+  transform: translate(-50%, -50%);
+}
 
 /* overflow:hidden clips the default outward focus ring, so give the
    carousel root an inset ring instead when it receives keyboard focus */

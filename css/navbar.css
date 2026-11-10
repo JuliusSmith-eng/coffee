@@ -1,23 +1,33 @@
 /* ==========================================================================
    Navbar
    ========================================================================== */
+/* ==========================================================================
+   Navbar — a floating oval capsule, detached from the edges
+   ========================================================================== */
 .navbar {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(94vw, 1180px);
   z-index: 100;
+  border-radius: var(--radius-pill);
   background: var(--navbar-bg);
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-  border-bottom: 1px solid transparent;
-  transition: background-color var(--dur-med) var(--ease),
-              backdrop-filter var(--dur-med) var(--ease),
-              border-color var(--dur-med) var(--ease);
-}
-.navbar.is-scrolled {
-  background: var(--navbar-bg-scrolled);
+  border: 1px solid var(--border);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom-color: var(--border);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28);
+  transition:
+    background-color var(--dur-med) var(--ease),
+    border-color var(--dur-med) var(--ease),
+    box-shadow var(--dur-med) var(--ease),
+    top var(--dur-med) var(--ease);
+}
+.navbar.is-scrolled {
+  top: 10px;
+  background: var(--navbar-bg-scrolled);
+  border-color: var(--border-strong);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.34);
 }
 
 .navbar__inner {
@@ -25,7 +35,8 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-md);
-  height: 84px;
+  height: 68px;
+  padding-inline: clamp(1rem, 2.4vw, 1.75rem);
 }
 
 .navbar__logo {
@@ -34,7 +45,11 @@
   gap: 0.7rem;
   flex-shrink: 0;
 }
-.navbar__logo img { width: 42px; height: 42px; border-radius: 50%; }
+.navbar__logo img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+}
 .navbar__logo span {
   font-family: var(--font-display);
   font-weight: 600;
@@ -53,21 +68,43 @@
 
 .navbar__pill {
   position: absolute;
-  top: 4px;
-  bottom: 4px;
+  top: 2px;
+  bottom: 2px;
   left: 0;
   width: 0;
-  border-radius: var(--radius-pill);
-  background: color-mix(in srgb, var(--accent) 20%, transparent);
-  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  /* An organic, asymmetric radius reads as a coffee bean rather than a
+     plain oval — paired with a low-opacity glass fill instead of a solid
+     tint. */
+  border-radius: 60% 40% 55% 45% / 58% 62% 38% 42%;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
   opacity: 0;
-  transition: transform var(--dur-med) var(--ease),
-              width var(--dur-med) var(--ease),
-              opacity var(--dur-fast) var(--ease);
+  transition:
+    transform var(--dur-med) var(--ease),
+    width var(--dur-med) var(--ease),
+    opacity var(--dur-fast) var(--ease);
   pointer-events: none;
 }
+/* The curved "crease" down the middle — the same detail as the bean icon
+   used elsewhere on the site — so the shape actually reads as a bean
+   rather than just a lopsided blob. */
+.navbar__pill::after {
+  content: "";
+  position: absolute;
+  top: 18%;
+  bottom: 18%;
+  left: 50%;
+  width: 1px;
+  border-left: 1px solid color-mix(in srgb, var(--accent) 50%, transparent);
+  border-radius: 50%;
+  transform: translateX(-50%) rotate(8deg) scaleX(3.2);
+}
 .navbar__nav:hover .navbar__pill,
-.navbar__nav .navbar__pill.is-visible { opacity: 1; }
+.navbar__nav .navbar__pill.is-visible {
+  opacity: 1;
+}
 
 .navbar__link {
   position: relative;
@@ -81,7 +118,9 @@
   transition: color var(--dur-fast) var(--ease);
 }
 .navbar__link:hover,
-.navbar__link.is-active { color: var(--text-primary); }
+.navbar__link.is-active {
+  color: var(--text-primary);
+}
 
 /* ---- Actions ---- */
 .navbar__actions {
@@ -99,8 +138,12 @@
   border-radius: var(--radius-pill);
   transition: transform var(--dur-fast) var(--ease);
 }
-.theme-toggle:hover { transform: scale(1.04); }
-.theme-toggle:active { transform: scale(0.96); }
+.theme-toggle:hover {
+  transform: scale(1.04);
+}
+.theme-toggle:active {
+  transform: scale(0.96);
+}
 
 .theme-toggle__track {
   position: relative;
@@ -111,7 +154,9 @@
   background: var(--surface);
   border: 1px solid var(--border-strong);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
-  transition: background-color var(--dur-med) var(--ease), border-color var(--dur-med) var(--ease);
+  transition:
+    background-color var(--dur-med) var(--ease),
+    border-color var(--dur-med) var(--ease);
 }
 
 .theme-toggle__knob {
@@ -128,25 +173,45 @@
   color: #241209;
   transition: transform var(--dur-med) var(--ease);
 }
-[data-theme="dark"] .theme-toggle__knob { transform: translateX(34px); }
+[data-theme="dark"] .theme-toggle__knob {
+  transform: translateX(34px);
+}
 
-.theme-toggle__knob svg { width: 15px; height: 15px; }
+.theme-toggle__knob svg {
+  width: 15px;
+  height: 15px;
+}
 .theme-toggle__knob .icon-cup,
 .theme-toggle__knob .icon-bean {
   position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
-  transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+  transition:
+    opacity var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
 }
-.theme-toggle__knob .icon-bean { opacity: 0; transform: scale(0.6) rotate(-20deg); }
-.theme-toggle__knob .icon-cup { opacity: 1; transform: scale(1) rotate(0deg); }
-[data-theme="dark"] .theme-toggle__knob .icon-bean { opacity: 1; transform: scale(1) rotate(0deg); }
-[data-theme="dark"] .theme-toggle__knob .icon-cup { opacity: 0; transform: scale(0.6) rotate(20deg); }
+.theme-toggle__knob .icon-bean {
+  opacity: 0;
+  transform: scale(0.6) rotate(-20deg);
+}
+.theme-toggle__knob .icon-cup {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+[data-theme="dark"] .theme-toggle__knob .icon-bean {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+[data-theme="dark"] .theme-toggle__knob .icon-cup {
+  opacity: 0;
+  transform: scale(0.6) rotate(20deg);
+}
 
 .navbar__burger {
   display: none;
-  width: 44px; height: 44px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1px solid var(--border-strong);
   position: relative;
@@ -156,23 +221,45 @@
 .navbar__burger span::after {
   content: "";
   position: absolute;
-  left: 0; right: 0;
+  left: 0;
+  right: 0;
   height: 2px;
   background: var(--text-primary);
-  transition: transform var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease), top var(--dur-fast) var(--ease);
+  transition:
+    transform var(--dur-fast) var(--ease),
+    opacity var(--dur-fast) var(--ease),
+    top var(--dur-fast) var(--ease);
 }
-.navbar__burger span { left: 12px; right: 12px; top: 21px; }
-.navbar__burger span::before { top: -7px; }
-.navbar__burger span::after { top: 7px; }
-.navbar__burger[aria-expanded="true"] span { background: transparent; }
-.navbar__burger[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
-.navbar__burger[aria-expanded="true"] span::after { top: 0; transform: rotate(-45deg); }
+.navbar__burger span {
+  left: 12px;
+  right: 12px;
+  top: 21px;
+}
+.navbar__burger span::before {
+  top: -7px;
+}
+.navbar__burger span::after {
+  top: 7px;
+}
+.navbar__burger[aria-expanded="true"] span {
+  background: transparent;
+}
+.navbar__burger[aria-expanded="true"] span::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+.navbar__burger[aria-expanded="true"] span::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
 
 /* ---- Mobile nav ---- */
 @media (max-width: 899px) {
   .navbar__nav {
     position: fixed;
-    top: 84px; left: 0; right: 0;
+    top: 84px;
+    left: 0;
+    right: 0;
     flex-direction: column;
     align-items: stretch;
     gap: 0.2rem;
@@ -183,15 +270,27 @@
     transform: translateY(-8px);
     opacity: 0;
     pointer-events: none;
-    transition: transform var(--dur-med) var(--ease), opacity var(--dur-med) var(--ease);
+    transition:
+      transform var(--dur-med) var(--ease),
+      opacity var(--dur-med) var(--ease);
   }
   .navbar__nav.is-open {
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
   }
-  .navbar__pill { display: none; }
-  .navbar__link { padding: 0.85rem 1rem; text-align: left; border-radius: var(--radius-sm); }
-  .navbar__link.is-active { background: var(--border); }
-  .navbar__burger { display: block; }
+  .navbar__pill {
+    display: none;
+  }
+  .navbar__link {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    border-radius: var(--radius-sm);
+  }
+  .navbar__link.is-active {
+    background: var(--border);
+  }
+  .navbar__burger {
+    display: block;
+  }
 }

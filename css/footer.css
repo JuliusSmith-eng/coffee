@@ -3,10 +3,51 @@
    ========================================================================== */
 .footer {
   position: relative;
-  border-top: 1px solid var(--border);
-  padding-block: var(--space-lg) var(--space-md);
-  background: var(--bg-elevated);
+  padding-block: calc(var(--space-lg) + 40px) var(--space-md);
+  background: #101b20 url("../assets/img/footer-1280.webp") center bottom / cover no-repeat;
+  /* The photo background is dark no matter which site theme is active, so
+     the footer always renders with dark-theme text/border tokens — fixed
+     values here, deliberately not var(--text-*), which would flip to dark
+     text in the light theme and disappear against this photo. */
+  --bg-base: #0c1519;
+  --bg-elevated: #101b20;
+  --border: rgba(201, 157, 123, 0.16);
+  --border-strong: rgba(201, 157, 123, 0.32);
+  --text-primary: #f4ebe1;
+  --text-secondary: #cfc2b6;
+  --text-muted: #8d8178;
+  --accent: var(--brass);
+  --accent-contrast: #0c1519;
+  color: var(--text-secondary);
+  /* Torn, hand-cut top edge instead of a straight border. X stays in %
+     (responsive width), Y stays in px (a fixed-height jagged strip no
+     matter how tall the footer ends up). */
+  clip-path: polygon(
+    0% 18px, 3% 6px, 6% 22px, 9% 2px, 12% 26px, 16% 8px, 19% 30px, 23% 4px,
+    27% 20px, 31% 0px, 35% 24px, 39% 10px, 43% 32px, 47% 6px, 51% 20px,
+    55% 2px, 59% 28px, 63% 8px, 67% 22px, 71% 0px, 75% 26px, 79% 6px,
+    83% 30px, 87% 4px, 91% 20px, 95% 10px, 100% 22px,
+    100% 100%, 0% 100%
+  );
 }
+
+/* Scrim so footer text stays legible over the photo regardless of where
+   the beans happen to fall. */
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--bg-elevated) 55%, transparent) 0%,
+    color-mix(in srgb, var(--bg-elevated) 15%, transparent) 32%,
+    color-mix(in srgb, var(--bg-elevated) 22%, transparent) 70%,
+    color-mix(in srgb, var(--bg-elevated) 72%, transparent) 100%
+  );
+  pointer-events: none;
+}
+
+.footer .wrap { position: relative; z-index: 1; }
 
 .footer__top {
   display: flex;
@@ -20,7 +61,10 @@
 .footer__brand .navbar__logo { margin-bottom: 0.9rem; }
 .footer__brand p { color: var(--text-muted); font-size: 0.92rem; }
 
-.footer__col h5 {
+.footer__col .footer__heading {
+  font-family: var(--font-body);
+  font-weight: 700;
+  line-height: 1.4;
   font-size: 0.8rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
